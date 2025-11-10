@@ -16,14 +16,17 @@ class Grille:
     def ajoute(self, bateau):
         for (l, c) in bateau.positions:
             if not (0 <= l < self.lignes and 0 <= c < self.colonnes):
-                return False
+                return False  
+
         for (l, c) in bateau.positions:
             idx = l * self.colonnes + c
             if self.grille[idx] != self.vide:
-                return False
+                return False  
+
         for (l, c) in bateau.positions:
             idx = l * self.colonnes + c
             self.grille[idx] = bateau.marque
+
         return True
 
     def __str__(self):
