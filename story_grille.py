@@ -1,5 +1,6 @@
 from grille import Grille
 
+
 def story_plouf():
     print("Story : Plouf dans l’eau ")
     g = Grille(5, 8)
@@ -11,6 +12,7 @@ def story_plouf():
     g.tirer(ligne, colonne)
     print("Résultat du tir :")
     print(g)
+
 
 if __name__ == "__main__":
     story_plouf()
