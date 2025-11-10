@@ -1,6 +1,7 @@
 from grille import Grille
 from bateau import Bateau
 
+
 def story_bateau():
     print("Story : Test des bateaux avec chevauchement 🚢\n")
 
@@ -16,6 +17,7 @@ def story_bateau():
 
     print("\nGrille finale :")
     print(g)
+
 
 if __name__ == "__main__":
     story_bateau()
