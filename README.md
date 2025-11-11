@@ -5,17 +5,27 @@ Le but est de couler tous les bateaux cachés sur la grille !
 -> Fonctionnalités : 
 
 - Grille de jeu dynamique (8x10)
-- Placement aléatoire des bateaux : 
-  •	🚢 Porte-avion (4 cases)
+- Placement aléatoire des bateaux :
+  
+  	•	🚢 Porte-avion (4 cases)
+  
 	•	🚤 Croiseur (3 cases)
+
 	•	🚣 Torpilleur (2 cases)
+
 	•	🐟 Sous-marin (2 cases)
+
 - Tirs au clavier :
-  •	❌ : tir manqué
+  
+  	•	❌ : tir manqué
+  
 	•	💣 : bateau touché
+
 	•	💥 : bateau coulé
-Commandes spéciales :
+- Commandes spéciales :
+
 	•	s → afficher la solution (emplacement des bateaux)
+
 	•	q → quitter la partie
 
 -> Installation et lancement du jeu 
