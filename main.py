@@ -2,9 +2,30 @@ import random
 from grille import Grille
 from bateau import PorteAvion, Croiseur, Torpilleur, SousMarin
 
+def afficher_grille_visible(g):
+    """Affiche la grille sans les bateaux (pour le joueur)."""
+    texte = ""
+    for l in range(g.lignes):
+        ligne = ""
+        for c in range(g.colonnes):
+            idx = l * g.colonnes + c
+            case = g.grille[idx]
+            if case in ['💣', '❌', '💥']:  
+                ligne += case
+            else:
+                ligne += g.vide  
+        texte += ligne + "\n"
+    return texte.strip()
+
+def afficher_solution(g):
+    """Affiche la grille réelle (avec bateaux)."""
+    return str(g)
+
+
 g = Grille(8, 10)
 bateaux_classes = [PorteAvion, Croiseur, Torpilleur, SousMarin]
 liste_bateaux = []
+
 
 for bateau_cls in bateaux_classes:
     positions_valides = []
@@ -16,8 +37,7 @@ for bateau_cls in bateaux_classes:
                 if ok:
                     positions_valides.append((ligne, colonne, vertical))
                     for (l, c) in b_test.positions:
-                        if 0 <= l < g.lignes and 0 <= c < g.colonnes:
-                            g.grille[l * g.colonnes + c] = g.vide
+                        g.grille[l * g.colonnes + c] = g.vide  
     if not positions_valides:
         raise ValueError(f"Impossible de placer {bateau_cls.__name__}")
     ligne, colonne, vertical = random.choice(positions_valides)
@@ -25,14 +45,23 @@ for bateau_cls in bateaux_classes:
     g.ajoute(bateau_final)
     liste_bateaux.append(bateau_final)
 
+
 coups = 0
 
 while liste_bateaux:
-    print("\n" + str(g))
-    tir_input = input("Entrez la ligne du tir (0-7) ou 'q' pour quitter : ")
+    print("\n=== Grille de jeu ===")
+    print(afficher_grille_visible(g))
+    tir_input = input("Entrez la ligne du tir (0-7), 's' pour solution, ou 'q' pour quitter : ")
+
     if tir_input.lower() in ['q', 'quit']:
         print("Vous avez quitté la partie.")
         break
+    if tir_input.lower() == 's':
+        print("\n=== SOLUTION ===")
+        print(afficher_solution(g))
+        input("\nAppuyez sur Entrée pour revenir au jeu...")
+        continue
+
 
     tir_colonne = input("Entrez la colonne du tir (0-9) ou 'q' pour quitter : ")
     if tir_colonne.lower() in ['q', 'quit']:
@@ -64,6 +93,7 @@ while liste_bateaux:
         g.tirer(tir_ligne, tir_colonne, touche='❌')
         print("Manqué !")
 
+
     bateaux_coules = []
     for b in liste_bateaux:
         if b.coule(g):
@@ -75,5 +105,6 @@ while liste_bateaux:
     for b in bateaux_coules:
         liste_bateaux.remove(b)
 
+
 if not liste_bateaux:
-    print(f"Félicitations ! Tous les bateaux sont coulés en {coups} coups.")
+    print(f"\nFélicitations ! Tous les bateaux sont coulés en {coups} coups.")
